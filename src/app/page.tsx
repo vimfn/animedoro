@@ -1,20 +1,19 @@
 import Image from "next/image";
+import Pomodoro from "./components/Pomodoro";
 
 const Home = () => {
   return (
-    <div className="relative min-h-screen bg-default bg-no-repeat bg-center bg-fixed bg-cover">
-      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40">
-        <nav className="px-12 py-5">
-          {/* <Image
-            src={"/images/logo.png"}
-            alt={"logo"}
-            width={128}
-            height={50}
-          ></Image> */}
-        </nav>
-      </div>
-      {/* <h1>Hello world</h1> */}
+    <div className="hero min-h-screen" style={{ backgroundImage: `url("https://marketplace.canva.com/EAFQDK2NEPU/1/0/1600w/canva-purple-anime-city-desktop-wallpaper-LEFL5_yVCqY.jpg")` }}>
+  <div className="hero-overlay bg-opacity-60"></div>
+  <div className="hero-content text-center text-neutral-content">
+    <div className="max-w-md">
+    <Pomodoro/>
+      
+      {/* <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p> */}
+      {/* <button className="btn btn-primary">Get Started</button> */}
     </div>
+  </div>
+</div>
   );
 };
 

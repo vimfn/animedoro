@@ -13,7 +13,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["retro"],
+    themes: ["dracula"],
   },
   plugins: [require("daisyui")],
 }
