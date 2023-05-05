@@ -8,16 +8,15 @@ interface pomodoroProps {}
 const pomodoro: FC<pomodoroProps> = ({}) => {
   const [timer, setTimer] = useState(3000);
   const [isRunning, setIsRunning] = useState(false);
-  const [isWatching, setisWatching] = useState(false)
+  const [isWatching, setisWatching] = useState(false);
 
   useEffect(() => {
-    if(isRunning && timer>0){
+    if (isRunning && timer > 0) {
       const interval = setInterval(() => {
         setTimer(timer - 1);
       }, 1000);
       return () => clearInterval(interval);
     }
-   
   }, [timer, isRunning]);
 
   const toggleTimer = () => {
@@ -26,7 +25,8 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
 
   const resetTimer = () => {
     setIsRunning(false);
-    setTimer(3000);
+    isWatching ? setTimer(1500) : setTimer(3000);
+    
   };
 
   const startWatching = () => {
@@ -34,15 +34,17 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
     setTimer(1500);
   };
 
-  const stratWorking =() => {
+  const stratWorking = () => {
     setisWatching(false);
     setTimer(3000);
-  }
+  };
 
   const getTimer = (timer: any) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer % 60;
-    return `${minutes < 10 ? "0" + minutes: minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    return `${minutes < 10 ? "0" + minutes : minutes}:${
+      seconds < 10 ? "0" + seconds : seconds
+    }`;
   };
 
   return (
@@ -53,8 +55,22 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
         <button className="btn btn-ghost btn-sm">📺 Watch</button> */}
         <div className="btn-group">
           {/* <button className="btn btn-secondary btn-sm">📚 Work</button> */}
-          <button className={`btn ${!isWatching ? 'btn-secondary' : 'btn-ghost'} btn-sm`} onClick={stratWorking}>📚 Work</button>
-          <button className={`btn ${isWatching ? 'btn-secondary' : 'btn-ghost'} btn-sm`} onClick={startWatching}>📺 Watch</button>
+          <button
+            className={`btn ${
+              !isWatching ? "btn-secondary" : "btn-ghost"
+            } btn-sm`}
+            onClick={stratWorking}
+          >
+            📚 Work
+          </button>
+          <button
+            className={`btn ${
+              isWatching ? "btn-secondary" : "btn-ghost"
+            } btn-sm`}
+            onClick={startWatching}
+          >
+            📺 Watch
+          </button>
         </div>
       </div>
       <div className="text-8xl font-bold">
@@ -65,10 +81,10 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
         </div>
       </div>
       <div className="flex gap-4 mt-4 justify-center">
-        <button className="btn btn-primary btn-sm" onClick={toggleTimer}>{isRunning ? "Pause" : "Start"}</button>
-        <button className="btn btn-sm"
-        onClick={resetTimer}>
-          
+        <button className="btn btn-primary btn-sm" onClick={toggleTimer}>
+          {isRunning ? "Pause" : "Start"}
+        </button>
+        <button className="btn btn-sm" onClick={resetTimer}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
