@@ -41,11 +41,10 @@ const Config: FC<ConfigProps> = ({}) => {
             ✕
           </label>
           <h3 className="text-lg font-bold">
-            Congratulations random Internet user!
+            never gonna give you up !
           </h3>
           <p className="py-4">
-            You have been selected for a chance to get one year of subscription
-            to use Wikipedia for free!
+            Settings Modal Comes here, i am bored meh..
           </p>
         </div>
       </div>
