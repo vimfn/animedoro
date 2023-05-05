@@ -30,12 +30,12 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
   };
 
   const startWatching = () => {
-    setisWatching(!isWatching);
+    setisWatching(true);
     setTimer(1500);
   };
 
   const stratWorking =() => {
-    setisWatching(!isWatching);
+    setisWatching(false);
     setTimer(3000);
   }
 
@@ -54,7 +54,7 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
         <div className="btn-group">
           {/* <button className="btn btn-secondary btn-sm">📚 Work</button> */}
           <button className={`btn ${!isWatching ? 'btn-secondary' : 'btn-ghost'} btn-sm`} onClick={stratWorking}>📚 Work</button>
-          <button className={`btn ${!isWatching ? 'btn-ghost' : 'btn-secondary'} btn-sm`} onClick={startWatching}>📺 Watch</button>
+          <button className={`btn ${isWatching ? 'btn-secondary' : 'btn-ghost'} btn-sm`} onClick={startWatching}>📺 Watch</button>
         </div>
       </div>
       <div className="text-8xl font-bold">
