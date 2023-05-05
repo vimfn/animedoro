@@ -8,11 +8,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'default': "url(https://marketplace.canva.com/EAFQDK2NEPU/1/0/1600w/canva-purple-anime-city-desktop-wallpaper-LEFL5_yVCqY.jpg)",
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: ["retro"],
+  },
+  plugins: [require("daisyui")],
 }
