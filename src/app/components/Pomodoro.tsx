@@ -1,19 +1,54 @@
-import { FC } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
+import { FC, useState, useEffect } from "react";
 import Config from "./Config";
 
 interface pomodoroProps {}
 
 const pomodoro: FC<pomodoroProps> = ({}) => {
+  const [timer, setTimer] = useState(360);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if(isRunning && timer>0){
+      const interval = setInterval(() => {
+        setTimer(timer - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+   
+  }, [timer, isRunning]);
+
+  const toggleTimer = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const getTimer = (timer: any) => {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    return `${minutes < 10 ? "0" + minutes: minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  };
+
   return (
     <div>
       <h1 className="text-4xl font-bold">animedoro</h1>
       <div className="flex gap-3 p-5 justify-center">
-        <button className="btn btn-secondary btn-sm">📚 Work</button>
-        <button className="btn btn-ghost btn-sm">📺 Watch</button>
+        {/* <button className="btn btn-secondary btn-sm ">📚 Work</button>
+        <button className="btn btn-ghost btn-sm">📺 Watch</button> */}
+        <div className="btn-group">
+          <button className="btn btn-secondary btn-sm">📚 Work</button>
+          <button className="btn btn-ghost btn-sm">📺 Watch</button>
+        </div>
       </div>
-      <div className="text-8xl font-bold">50:00</div>
+      <div className="text-8xl font-bold">
+        <div className="flex flex-col gap-3">
+          {/* 50:00 */}
+          {getTimer(timer)}
+          {/* <progress className="progress progress-secondary w-128" value="40" max="100"></progress> */}
+        </div>
+      </div>
       <div className="flex gap-4 mt-4 justify-center">
-        <button className="btn btn-primary btn-sm">Start</button>
+        <button className="btn btn-primary btn-sm" onClick={toggleTimer}>{isRunning ? "Pause" : "Start"}</button>
         <button className="btn btn-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
