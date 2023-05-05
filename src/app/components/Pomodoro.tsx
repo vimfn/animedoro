@@ -6,8 +6,9 @@ import Config from "./Config";
 interface pomodoroProps {}
 
 const pomodoro: FC<pomodoroProps> = ({}) => {
-  const [timer, setTimer] = useState(360);
+  const [timer, setTimer] = useState(3000);
   const [isRunning, setIsRunning] = useState(false);
+  const [isWatching, setisWatching] = useState(false)
 
   useEffect(() => {
     if(isRunning && timer>0){
@@ -23,6 +24,21 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
     setIsRunning(!isRunning);
   };
 
+  const resetTimer = () => {
+    setIsRunning(false);
+    setTimer(3000);
+  };
+
+  const startWatching = () => {
+    setisWatching(!isWatching);
+    setTimer(1500);
+  };
+
+  const stratWorking =() => {
+    setisWatching(!isWatching);
+    setTimer(3000);
+  }
+
   const getTimer = (timer: any) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer % 60;
@@ -36,8 +52,9 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
         {/* <button className="btn btn-secondary btn-sm ">📚 Work</button>
         <button className="btn btn-ghost btn-sm">📺 Watch</button> */}
         <div className="btn-group">
-          <button className="btn btn-secondary btn-sm">📚 Work</button>
-          <button className="btn btn-ghost btn-sm">📺 Watch</button>
+          {/* <button className="btn btn-secondary btn-sm">📚 Work</button> */}
+          <button className={`btn ${!isWatching ? 'btn-secondary' : 'btn-ghost'} btn-sm`} onClick={stratWorking}>📚 Work</button>
+          <button className={`btn ${!isWatching ? 'btn-ghost' : 'btn-secondary'} btn-sm`} onClick={startWatching}>📺 Watch</button>
         </div>
       </div>
       <div className="text-8xl font-bold">
@@ -49,7 +66,9 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
       </div>
       <div className="flex gap-4 mt-4 justify-center">
         <button className="btn btn-primary btn-sm" onClick={toggleTimer}>{isRunning ? "Pause" : "Start"}</button>
-        <button className="btn btn-sm">
+        <button className="btn btn-sm"
+        onClick={resetTimer}>
+          
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
