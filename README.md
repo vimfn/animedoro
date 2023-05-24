@@ -1,6 +1,6 @@
 # Animedoro
 
-Animedoro is a Pomodoro timer application built with Next.js 13, Tailwind CSS, and TypeScript. It's like having your very own productivity ninja to keep you focused and motivated inspired by **[animedoro-timer](https://github.com/ankushKun/animedoro-timer)** from Senpai Ankush.
+Animedoro is a Pomodoro timer application built with Next.js 13, Tailwind CSS, and TypeScript. Inspired by **[animedoro-timer](https://github.com/ankushKun/animedoro-timer)** from Senpai Ankush.
 
 ![demo.gif](https://media.discordapp.net/attachments/1110910329698914355/1110910329937985567/demo.gif?width=854&height=438)
 
