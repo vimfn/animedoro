@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Animedoro
 
-## Getting Started
+Animedoro is a Pomodoro timer application built with Next.js 13, Tailwind CSS, and TypeScript. It's like having your very own productivity ninja to keep you focused and motivated inspired by **[animedoro-timer](https://github.com/ankushKun/animedoro-timer)** from Senpai Ankush.
 
-First, run the development server:
+![demo.gif](https://media.discordapp.net/attachments/1110910329698914355/1110910329937985567/demo.gif?width=854&height=438)
+
+## Features 🚀
+
+- Start and pause the timer for intense work sessions or well-deserved breaks.
+- Choose between work mode and watch mode. Yes, watching anime counts as being productive! 😉
+- Customize the duration of your work sessions and breaks. You're the boss of your time!
+- Witness the countdown timer ticking away, reminding you that time is fleeting. ⏳
+- Get a satisfying notification sound when the timer reaches zero. Celebrate small victories!
+- Watch confetti rain down on your screen when you conquer your task. It's a virtual party! 🎉
+- Responsively designed, so you can be productive wherever you go. Time doesn't wait, and neither should you!
+- Spotify Playback Control: Play, Pause, Next, Previous, Shuffle, Repeat, Volume Control, and more. **(Coming soon!)**
+
+## Technologies Used 🛠️
+
+- Next.js 13: The React framework of my choice.
+- Tailwind CSS: The styling framework that magically makes your UI look amazing.
+- TypeScript: The type-safe language that makes your code more robust.
+
+## Getting Started 🏁
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd animedoro
+```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open your browser and visit http://localhost:3000 to unleash your productivity ninja!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage 💡
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[![animedoro](https://i.ytimg.com/vi/bUjGZJIgse0/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAj4sXHvNwa4rIq8qk7CGc74m5YHw)](https://www.youtube.com/watch?v=bUjGZJIgse0)
 
-## Learn More
+## License 📄
 
-To learn more about Next.js, take a look at the following resources:
+This project is licensed under the MIT License. Use it wisely, like a true productivity ninja!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Feel free to reach out to me if you have any questions or suggestions. I'd love to hear from you! 😊
