@@ -3,15 +3,16 @@
 import { FC, useState, useEffect } from "react";
 import Config from "./Config";
 import SettingsIcon from "./Icons/SettingsIcon";
+import ResetIcon from "./Icons/ResetIcon";
 
 interface pomodoroProps {}
 
 const pomodoro: FC<pomodoroProps> = ({}) => {
   const [timer, setTimer] = useState(3000);
   const [isRunning, setIsRunning] = useState(false);
-  const [isWatching, setisWatching] = useState(false);
-  const [workTime, setWorkTime] = useState(25 * 60); // default work time is 25 minutes
-  const [watchTime, setWatchTime] = useState(15 * 60); // default watch time is 15 minutes
+  const [isWatching, setIsWatching] = useState(false);
+  const [workTime, setWorkTime] = useState(50 * 60); // default work time is 25 minutes
+  const [watchTime, setWatchTime] = useState(10 * 60); // default watch time is 15 minutes
 
   useEffect(() => {
     if (isRunning && timer > 0) {
@@ -19,6 +20,9 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
         setTimer(timer - 1);
       }, 1000);
       return () => clearInterval(interval);
+    } else if (timer === 0) {
+      playMusic(); // Play music when the timer reaches zero
+      sendNotification(); // Send notification when the timer reaches zero
     }
   }, [timer, isRunning]);
 
@@ -28,20 +32,21 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
 
   const resetTimer = () => {
     setIsRunning(false);
-    isWatching ? setTimer(watchTime) : setTimer(workTime);
-  };
-
-  const startWatching = () => {
-    setisWatching(true);
-    setTimer(watchTime);
-  };
-
-  const stratWorking = () => {
-    setisWatching(false);
+    setIsWatching(false);
     setTimer(workTime);
   };
 
-  const getTimer = (timer: any) => {
+  const startWatching = () => {
+    setIsWatching(true);
+    setTimer(watchTime);
+  };
+
+  const startWorking = () => {
+    setIsWatching(false);
+    setTimer(workTime);
+  };
+
+  const getTimer = (timer: number) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer % 60;
     return `${minutes < 10 ? "0" + minutes : minutes}:${
@@ -57,6 +62,23 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
     }
   };
 
+  const playMusic = () => {
+    const audio = new Audio(
+      "https://dl.dropboxusercontent.com/s/52m5j7wdibcjr6k/music.mp3"
+    );
+    audio.play();
+  };
+
+  const sendNotification = () => {
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification("Timer Ended"); // Display notification when the timer ends
+        }
+      });
+    }
+  };
+
   return (
     <div>
       <h1 className="text-4xl font-bold">animedoro</h1>
@@ -66,7 +88,7 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
             className={`btn ${
               !isWatching ? "btn-secondary" : "btn-ghost"
             } btn-sm`}
-            onClick={stratWorking}
+            onClick={startWorking}
           >
             📚 Work
           </button>
@@ -88,7 +110,7 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
           {isRunning ? "Pause" : "Start"}
         </button>
         <button className="btn btn-sm" onClick={resetTimer}>
-          Reset
+          <ResetIcon />
         </button>
 
         {/* The button to open modal */}

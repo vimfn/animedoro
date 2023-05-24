@@ -6,8 +6,8 @@ interface ConfigProps {
 }
 
 const Config: FC<ConfigProps> = ({ onSubmit }) => {
-  const [workTime, setWorkTime] = useState(25);
-  const [watchTime, setWatchTime] = useState(15);
+  const [workTime, setWorkTime] = useState(50);
+  const [watchTime, setWatchTime] = useState(10);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
