@@ -4,6 +4,8 @@ import { FC, useState, useEffect } from "react";
 import Config from "./Config";
 import SettingsIcon from "./Icons/SettingsIcon";
 import ResetIcon from "./Icons/ResetIcon";
+import useWindowSize from "../../../lib/useWindowSize";
+import Confetti from "react-confetti";
 
 interface pomodoroProps {}
 
@@ -13,6 +15,10 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
   const [isWatching, setIsWatching] = useState(false);
   const [workTime, setWorkTime] = useState(50 * 60); // default work time is 25 minutes
   const [watchTime, setWatchTime] = useState(10 * 60); // default watch time is 15 minutes
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const { width, height } = useWindowSize();
+  // console.log(width, height);
 
   useEffect(() => {
     if (isRunning && timer > 0) {
@@ -67,6 +73,7 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
       "https://dl.dropboxusercontent.com/s/52m5j7wdibcjr6k/music.mp3"
     );
     audio.play();
+    setShowConfetti(true);
   };
 
   const sendNotification = () => {
@@ -126,6 +133,7 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
           </div>
         </div>
       </div>
+      {showConfetti && <Confetti width={width} height={height} />}
     </div>
   );
 };
