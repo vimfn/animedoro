@@ -11,45 +11,53 @@ interface pomodoroProps {}
 
 const pomodoro: FC<pomodoroProps> = ({}) => {
   const [timer, setTimer] = useState(3000);
+  const [initialTimer, setInitialTimer] = useState(3000);
   const [isRunning, setIsRunning] = useState(false);
   const [isWatching, setIsWatching] = useState(false);
-  const [workTime, setWorkTime] = useState(50 * 60); // default work time is 25 minutes
-  const [watchTime, setWatchTime] = useState(10 * 60); // default watch time is 15 minutes
+  const [workTime, setWorkTime] = useState(50 * 60); // default work time is 50 minutes
+  const [watchTime, setWatchTime] = useState(10 * 60); // default watch time is 10 minutes
   const [showConfetti, setShowConfetti] = useState(false);
 
   const { width, height } = useWindowSize();
-  // console.log(width, height);
 
   useEffect(() => {
     if (isRunning && timer > 0) {
       const interval = setInterval(() => {
-        setTimer(timer - 1);
+        setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
       return () => clearInterval(interval);
     } else if (timer === 0) {
-      playMusic(); // Play music when the timer reaches zero
-      sendNotification(); // Send notification when the timer reaches zero
+      playMusic();
+      sendNotification();
+      setIsRunning(false);
+      setShowConfetti(true);
+      setTimer(initialTimer);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 10000);
     }
-  }, [timer, isRunning]);
+  }, [timer, isRunning, initialTimer]);
 
   const toggleTimer = () => {
-    setIsRunning(!isRunning);
+    setIsRunning((prevState) => !prevState);
   };
 
   const resetTimer = () => {
     setIsRunning(false);
     setIsWatching(false);
-    setTimer(workTime);
+    setTimer(initialTimer);
   };
 
   const startWatching = () => {
     setIsWatching(true);
     setTimer(watchTime);
+    setInitialTimer(watchTime);
   };
 
   const startWorking = () => {
     setIsWatching(false);
     setTimer(workTime);
+    setInitialTimer(workTime);
   };
 
   const getTimer = (timer: number) => {
@@ -65,6 +73,10 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
     setWatchTime(watchTime);
     if (!isWatching) {
       setTimer(workTime);
+      setInitialTimer(workTime);
+    } else {
+      setTimer(watchTime);
+      setInitialTimer(watchTime);
     }
   };
 
@@ -73,14 +85,13 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
       "https://dl.dropboxusercontent.com/s/52m5j7wdibcjr6k/music.mp3"
     );
     audio.play();
-    setShowConfetti(true);
   };
 
   const sendNotification = () => {
     if ("Notification" in window) {
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
-          new Notification("Timer Ended"); // Display notification when the timer ends
+          new Notification("Timer Ended");
         }
       });
     }
@@ -120,12 +131,10 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
           <ResetIcon />
         </button>
 
-        {/* The button to open modal */}
         <label htmlFor="my-modal-3" className="btn btn-sm">
           <SettingsIcon />
         </label>
 
-        {/* Put this part before </body> tag */}
         <input type="checkbox" id="my-modal-3" className="modal-toggle" />
         <div className="modal">
           <div className="modal-box relative">
