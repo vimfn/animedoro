@@ -55,7 +55,7 @@ npm run dev
 
 ## License 📄
 
-This project is licensed under the MIT License. Use it wisely, like a true productivity ninja!
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
