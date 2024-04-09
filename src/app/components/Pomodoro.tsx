@@ -7,9 +7,9 @@ import ResetIcon from "./Icons/ResetIcon";
 import useWindowSize from "../../../lib/useWindowSize";
 import Confetti from "react-confetti";
 
-interface pomodoroProps {}
+interface pomodoroProps { }
 
-const pomodoro: FC<pomodoroProps> = ({}) => {
+const pomodoro: FC<pomodoroProps> = ({ }) => {
   const [timer, setTimer] = useState(3000);
   const [initialTimer, setInitialTimer] = useState(3000);
   const [isRunning, setIsRunning] = useState(false);
@@ -21,10 +21,12 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
   const { width, height } = useWindowSize();
 
   useEffect(() => {
+
     if (isRunning && timer > 0) {
       const interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
+      document.title = getTimer(timer);
       return () => clearInterval(interval);
     } else if (timer === 0) {
       playMusic();
@@ -46,6 +48,7 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
     setIsRunning(false);
     setIsWatching(false);
     setTimer(initialTimer);
+    document.title = "Animedoro";
   };
 
   const startWatching = () => {
@@ -63,12 +66,12 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
   const getTimer = (timer: number) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer % 60;
-    return `${minutes < 10 ? "0" + minutes : minutes}:${
-      seconds < 10 ? "0" + seconds : seconds
-    }`;
+    return `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds
+      }`;
   };
 
-  const handleConfigSubmit = (workTime: number, watchTime: number) => {
+  const handleConfigSubmit = (workTime: number, watchTime: number, animeURL: string) => {
+    alert(animeURL)
     setWorkTime(workTime);
     setWatchTime(watchTime);
     if (!isWatching) {
@@ -103,17 +106,15 @@ const pomodoro: FC<pomodoroProps> = ({}) => {
       <div className="flex gap-3 p-5 justify-center">
         <div className="btn-group">
           <button
-            className={`btn ${
-              !isWatching ? "btn-secondary" : "btn-ghost"
-            } btn-sm`}
+            className={`btn ${!isWatching ? "btn-secondary" : "btn-ghost"
+              } btn-sm`}
             onClick={startWorking}
           >
             📚 Work
           </button>
           <button
-            className={`btn ${
-              isWatching ? "btn-secondary" : "btn-ghost"
-            } btn-sm`}
+            className={`btn ${isWatching ? "btn-secondary" : "btn-ghost"
+              } btn-sm`}
             onClick={startWatching}
           >
             📺 Watch

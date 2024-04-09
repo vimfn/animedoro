@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Animedoro",
-  description: "Set your pommoro timer and watch anime while you wait!",
+  description: "Set your pommoro timer and watch anime in the breaks!",
 };
 
 export default function RootLayout({
